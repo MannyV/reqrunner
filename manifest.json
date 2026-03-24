@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Req Runner",
+  "version": "1.0",
+  "icons": {
+    "16": "assets/sparkle16.png",
+    "32": "assets/sparkle32.png",
+    "48": "assets/sparkle48.png",
+    "128": "assets/sparkle128.png"
+  },
+  "description": "Automate job applications on LinkedIn and external portals using Gemini AI.",
+  "permissions": [
+    "identity",
+    "storage",
+    "scripting",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "assets/sparkle16.png",
+      "32": "assets/sparkle32.png",
+      "48": "assets/sparkle48.png",
+      "128": "assets/sparkle128.png"
+    }
+  },
+  "options_page": "src/options/options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content/content.js"],
+      "css": ["src/content/content.css"]
+    }
+  ],
+  "oauth2": {
+    "client_id": "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly"
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
